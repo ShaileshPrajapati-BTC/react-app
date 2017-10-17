@@ -27,10 +27,11 @@ function StudentList(props){
 
 function PerfromanceList(props){
   var list = props.data.sort((a, b) =>
-     a.mark < b.mark
+     a.mark - b.mark
   );
   var new_data = [];
-    var data = list.map((data, index) =>
+  var new_list = list.reverse();
+    var data = new_list.map((data, index) =>
       <TableRow first={index+1} second={data.name}/>
     );
     new_data.push(data)
