@@ -3,19 +3,25 @@ import logo from './logo.svg';
 import './App.css';
 
 
- function StudentList(props){
-    var listItems = props.data.map((data) =>
-      <tr>
-        <td>
-        {data.name}
-        </td>
-        <td>
-        {data.mark}
-        </td>
-      </tr>
+function TableRow(props){
+  return(
+    <tr>
+      <td>
+      {props.first}
+      </td>
+      <td>
+      {props.second}
+      </td>
+    </tr>
+  )
+}
+
+function StudentList(props){
+    var stud_list = props.data.map((data) =>
+      <TableRow first={data.name} second={data.mark}/>
     );
     return(
-      listItems
+      stud_list
     )
 }
 
@@ -25,14 +31,7 @@ function PerfromanceList(props){
   );
   var new_data = [];
     var data = list.map((data, index) =>
-      <tr>
-        <td>
-        {index+1}
-        </td>
-        <td>
-        {data.name}
-        </td>
-      </tr>
+      <TableRow first={index+1} second={data.name}/>
     );
     new_data.push(data)
     return(
@@ -40,27 +39,13 @@ function PerfromanceList(props){
     )
 }
 
-function ListHead(props){
-  return(
-    <tr>
-      <td>
-        {props.first}
-      </td>
-      <td>
-        {props.second}
-      </td>
-    </tr>
-  );
-}
-
-
 function Table(props){
   return(
     <div className="App">
       <h2> {props.title} </h2>
       <table className="table" border="1">
         <thead>
-        {(props.datalist)? <ListHead first="Name" second="Mark"/> : <ListHead first="Rank" second="Name"/>}
+        {(props.datalist)? <TableRow first="Name" second="Mark"/> : <TableRow first="Rank" second="Name"/>}
         </thead>
         <tbody>
         {(props.datalist)? <StudentList data={props.data}/> : <PerfromanceList data={props.data}/>}
